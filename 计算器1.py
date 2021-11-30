@@ -541,6 +541,7 @@ class Ui_MainWindow(object):
                 elif self.operation[i]=='%':
                     self.num1=self.num1%self.numbers[i+1]
         self.sum=self.num1
+        self.numbers.pop(len(self.numbers)-1)
         self.lcdNumber.setProperty("value",self.sum)
                     
     def Dian(self):
