@@ -513,8 +513,7 @@ class Ui_MainWindow(object):
             a=a+int(b%2)*int(h.pow(10,i))
             i=i+1
             b=b/2
-        self.sum=a
-        self.lcdNumber.setProperty("value",self.sum)
+        self.lcdNumber.setProperty("value",a)
         
     def ReSet(self):        #重置计算器
         self.sum=0
