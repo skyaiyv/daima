@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(390, 371, 195, 64))
+        self.pushButton.setGeometry(QtCore.QRect(351, 371, 234, 64))
         font = QtGui.QFont()
         font.setFamily("方正舒体")
         font.setPointSize(20)
@@ -210,7 +210,7 @@ class Ui_MainWindow(object):
         self.pushButton_20.setFont(font)
         self.pushButton_20.setObjectName("pushButton_20")
         self.pushButton_21 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_21.setGeometry(QtCore.QRect(195, 371, 195, 64))
+        self.pushButton_21.setGeometry(QtCore.QRect(117, 371, 117, 64))
         font = QtGui.QFont()
         font.setFamily("Agency FB")
         font.setPointSize(20)
@@ -251,12 +251,21 @@ class Ui_MainWindow(object):
         self.pushButton_22.setFont(font)
         self.pushButton_22.setObjectName("pushButton_22")
         self.pushButton_23 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_23.setGeometry(QtCore.QRect(0, 371, 195, 64))
+        self.pushButton_23.setGeometry(QtCore.QRect(0, 371, 117, 64))
         font = QtGui.QFont()
         font.setFamily("方正舒体")
         font.setPointSize(20)
         self.pushButton_23.setFont(font)
         self.pushButton_23.setObjectName("pushButton_23")
+        
+        self.pushButton_24 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_24.setGeometry(QtCore.QRect(234, 371, 117, 64))
+        font = QtGui.QFont()
+        font.setFamily("方正舒体")
+        font.setPointSize(20)
+        self.pushButton_24.setFont(font)
+        self.pushButton_24.setObjectName("pushButton_24")
+        
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(260, 0, 80, 30))
         font = QtGui.QFont()
@@ -298,7 +307,7 @@ class Ui_MainWindow(object):
         self.pushButton_4.clicked.connect(self.multiply)
         self.pushButton_5.clicked.connect(self.divis)
         self.pushButton_6.clicked.connect(self.after)
-        self.pushButton_7.clicked.connect(self.cube)
+        self.pushButton_7.clicked.connect(self.PowerLaw)
         self.pushButton_8.clicked.connect(self.ping)
         self.pushButton_9.clicked.connect(self.genhao)
         self.pushButton_10.clicked.connect(self.changtoer)
@@ -315,6 +324,7 @@ class Ui_MainWindow(object):
         self.pushButton_21.clicked.connect(self.Equals)
         self.pushButton_22.clicked.connect(self.Dian)
         self.pushButton_23.clicked.connect(self.ReSet)
+        self.pushButton_24.clicked.connect(self.de)
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.dateEdit, self.pushButton_3)
@@ -348,7 +358,7 @@ class Ui_MainWindow(object):
         self.pushButton_4.setText(_translate("MainWindow", "*"))
         self.pushButton_5.setText(_translate("MainWindow", "/"))
         self.pushButton_6.setText(_translate("MainWindow", "%"))
-        self.pushButton_7.setText(_translate("MainWindow", "x^3"))
+        self.pushButton_7.setText(_translate("MainWindow", "x^y"))
         self.pushButton_8.setText(_translate("MainWindow", "x^2"))
         self.pushButton_9.setText(_translate("MainWindow", "x^0.5"))
         self.pushButton_10.setText(_translate("MainWindow", "二进制"))
@@ -366,6 +376,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "班级:"))
         self.pushButton_22.setText(_translate("MainWindow", "."))
         self.pushButton_23.setText(_translate("MainWindow", "清空"))
+        self.pushButton_24.setText(_translate("MainWindow", "删除"))
         self.lineEdit.setText(_translate("MainWindow", "信卓12001"))
         self.label_2.setText(_translate("MainWindow", "姓名:"))
         self.lineEdit_2.setText(_translate("MainWindow", "金魔人"))
@@ -377,124 +388,93 @@ class Ui_MainWindow(object):
         self.num=0
         self.temp=''            #获取数字
         self.sum=0              #获取和
+        self.lennum=0            #列表长度
         self.operation=[]       #得到运算符号的排列
         self.numbers=[]         #得到数字的输入顺序
+        self.dele=[]            #得到数字删除的位置
     
-    def NumInput_1(self): 
-        self.temp+='1'
+    def NumInput(self,num): 
+        self.temp+=num
         if self.isdian:
             self.num=float(self.temp)
         else: 
             self.num=int(self.temp)
         self.lcdNumber.setProperty("value",self.num)
+    
+    def NumInput_1(self): 
+        self.NumInput('1')
         
     def NumInput_2(self): 
-        self.temp+='2'
-        if self.isdian:
-            self.num=float(self.temp)
-        else: 
-            self.num=int(self.temp)
-        self.lcdNumber.setProperty("value",self.num)
-        
+        self.NumInput('2')    
+    
     def NumInput_3(self): 
-        self.temp+='3'
-        if self.isdian:
-            self.num=float(self.temp)
-        else: 
-            self.num=int(self.temp)
-        self.lcdNumber.setProperty("value",self.num)
+        self.NumInput('3')
     
     def NumInput_4(self): 
-        self.temp+='4'
-        if self.isdian:
-            self.num=float(self.temp)
-        else: 
-            self.num=int(self.temp)
-        self.lcdNumber.setProperty("value",self.num)
+        self.NumInput('4')
         
     def NumInput_5(self): 
-        self.temp+='5'
-        if self.isdian:
-            self.num=float(self.temp)
-        else: 
-            self.num=int(self.temp)
-        self.lcdNumber.setProperty("value",self.num)
+        self.NumInput('5')
         
     def NumInput_6(self): 
-        self.temp+='6'
-        if self.isdian:
-            self.num=float(self.temp)
-        else: 
-            self.num=int(self.temp)
-        self.lcdNumber.setProperty("value",self.num)
+        self.NumInput('6')
         
     def NumInput_7(self): 
-        self.temp+='7'
-        if self.isdian:
-            self.num=float(self.temp)
-        else: 
-            self.num=int(self.temp)
-        self.lcdNumber.setProperty("value",self.num)
+        self.NumInput('7')
         
     def NumInput_8(self): 
-        self.temp+='8'
-        if self.isdian:
-            self.num=float(self.temp)
-        else: 
-            self.num=int(self.temp)
-        self.lcdNumber.setProperty("value",self.num)
+        self.NumInput('8')
         
     def NumInput_9(self): 
-        self.temp+='9'
-        if self.isdian:
-            self.num=float(self.temp)
-        else: 
-            self.num=int(self.temp)
-        self.lcdNumber.setProperty("value",self.num)
+        self.NumInput('9')
         
     def NumInput_0(self): 
-        self.temp+='0'
-        if self.isdian:
-            self.num=float(self.temp)
-        else: 
-            self.num=int(self.temp)
-        self.lcdNumber.setProperty("value",self.num)
+        self.NumInput('0')
         
     def Add(self):
+        self.lennum+=1
         self.numbers.append(self.num)
         self.operation.append('+')
         self.temp=''
         
     def Sub(self):
+        self.lennum+=1
         self.numbers.append(self.num)
         self.operation.append('-')
         self.temp=''
     
     def multiply(self):
+        self.lennum+=1
         self.numbers.append(self.num)
         self.operation.append('*')
         self.temp=''
         
     def divis(self):
+        self.lennum+=1
         self.numbers.append(self.num)
         self.operation.append('/')
         self.temp=''
+        self.num=0
         
     def after(self):
+        self.lennum+=1
         self.numbers.append(self.num)
         self.operation.append('%')
         self.temp=''
         
-    def cube(self):
-        if self.sum==0:
-            self.sum=self.num
-        self.sum=h.pow(float(self.sum),3)
-        self.lcdNumber.setProperty("value",self.sum)
+    def PowerLaw(self):
+        self.lennum+=1
+        self.numbers.append(self.num)
+        self.operation.append('^')
+        self.temp=''
         
     def ping(self):
         if self.sum==0:
             self.sum=self.num
-        self.sum=h.pow(float(self.sum),2)
+        try:    
+            self.sum=h.pow(float(self.sum),2)
+        except:
+            pass
         self.lcdNumber.setProperty("value",self.sum)
         
     def genhao(self):
@@ -519,13 +499,34 @@ class Ui_MainWindow(object):
         self.sum=0
         self.temp=''
         self.num1=0
+        self.num=0
+        self.lennum=0
+        self.dele=[]
         self.numbers=[]
         self.operation=[]
         self.lcdNumber.setProperty("value",self.sum)
         
+    def de(self): #删除一个输入
+        i=len(self.numbers)
+        if self.lennum>0 and (i-self.lennum)==len(self.dele):
+            self.dele.append(i)
+            self.lennum-=1
+        try:
+            self.lcdNumber.setProperty("value",self.numbers[i-1])
+        except:
+            self.lcdNumber.setProperty("value",0)
+        
+        
     def Equals(self):       #输出结果
         self.numbers.append(self.num)
-        if len(self.numbers)>0:
+        delnums=len(self.dele)
+        for i in range(delnums):
+            self.numbers.pop(self.dele[i]-i)
+            if self.dele[i]>0:
+                t=0
+                self.operation.pop(self.dele[i]-1-t)
+                t+=1
+        if len(self.dele)!=len(self.numbers):
                 self.num1=self.numbers[0]
         for i in range(len(self.numbers)):
             if i+1<len(self.numbers):
@@ -536,11 +537,23 @@ class Ui_MainWindow(object):
                 elif self.operation[i]=='-':
                     self.num1-=self.numbers[i+1]
                 elif self.operation[i]=='/':
-                    self.num1/=self.numbers[i+1]
+                    try:
+                        self.num1/=self.numbers[i+1]
+                    except:
+                        pass # ignore
                 elif self.operation[i]=='%':
-                    self.num1=self.num1%self.numbers[i+1]
+                    try:
+                        self.num1%=self.numbers[i+1]
+                    except:
+                        pass # ignore
+                elif self.operation[i]=='^':
+                    try:
+                        self.num1=self.num1**self.numbers[i+1]
+                    except:
+                        pass
         self.sum=self.num1
         self.numbers.pop(len(self.numbers)-1)
+        self.dele=[]
         self.lcdNumber.setProperty("value",self.sum)
                     
     def Dian(self):
